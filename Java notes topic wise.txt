@@ -1,0 +1,295 @@
+In this doc : Java notes are given :topics mentioned by manoj sir and othe important topics as well.
+
+
+1>String Objects and String literals creation in memory:
+
+   -A string literal is a string that is directly written in the code, like "Hello".
+  
+   -These literals are stored in a special area of memory known as the *String Pool* (also called the intern pool).
+
+   -When you create a string literal, Java checks if the string already exists in the pool. If it does, the existing reference is reused; otherwise, the string is added to the pool.
+
+   -This ensures that there is only one instance of each string literal in memory, improving memory efficiency.
+   String s1 = "Hello";
+   String s2 = "Hello";
+   // s1 and s2 reference the same object in the String Pool: both s1 and s2 will point to the same memory location in the String Pool.
+ 
+   -**IMP Point: It is part of Method area :String Pool is a part of the Method Area in the JVM's memory architecture.
+
+2>String Objects (Using new Keyword):
+
+   -When you create a string using the new keyword (e.g., new String("Hello")), a new String object is created in heap memory.
+
+   -Even if the string value already exists in the String Pool, a new object will be created on the heap, and it won't reference the string in the pool.
+
+   -This means that a new object will always be created, even if the string is identical to one already in the pool.
+
+   -String s1 = new String("Hello");
+   -String s2 = new String("Hello");
+   -// s1 and s2 reference different objects in heap memory
+  
+   -Performance:
+
+   -Using string literals is generally more memory-efficient and faster since strings in the pool are shared.
+
+   -Using new creates new objects, which may lead to more memory usage and slower performance because of the additional object creation.
+
+   -Example
+            
+   public class StringTest {
+    public static void main(String[] args) {
+        String str1 = "Hello";
+        String str2 = "Hello";
+        String str3 = new String("Hello");
+        String str4 = new String("Hello");
+
+        System.out.println(str1 == str2);  // true, both refer to the same object in the String Pool
+        System.out.println(str1 == str3);  // false, str3 is a new object in the heap
+        System.out.println(str3 == str4);  // false, str3 and str4 are different objects in the heap
+                }
+           }
+
+2) String buffer and String builder: String are immutable in java so while performing operation on string : by creating new string buffer and string builder makes it mutable.
+ 
+      1> String buffer:
+         - StringBuffer is a class in Java that provides an alternative to String when you need to modify the value of a string repeatedly.
+
+         -It is part of java.lang package and is used to create mutable strings. Don't need to import any librabry for stringbuff it is part of java.lang which is automatically imported in                     
+           every java program.
+   
+         -Key Features of StringBuffer:
+          Mutable: Unlike String, which is immutable, a StringBuffer can change its value without creating a new object.
+
+          Thread-Safe: StringBuffer is synchronized, which means multiple threads can access and modify a StringBuffer object safely without causing data corruption. However, this  
+          synchronization makes it slower than StringBuilder in single-threaded applications.
+ 
+         -***Common Methods of StringBuffer:
+          append(): Adds data to the end of the string.
+
+          insert(): Inserts data at a specified position.
+           StringBuffer sb = new StringBuffer("Hello");
+           sb.insert(5, " World");  // Inserts " World" at position 5
+
+          delete(): Deletes characters from the string. : StringBuffer delete(int start, int end);
+ 
+          deletCharAt():StringBuffer deleteCharAt(int index);
+
+
+          reverse(): Reverses the string.:sb.reverse();
+
+          toString(): Converts the StringBuffer into a String.
+
+          capacity(): Purpose: Returns the current capacity of the StringBuffer (the amount of space allocated). :System.out.println(sb.capacity()); default capa is set 16 so for "hello"                    
+           21
+          setLength()
+ 
+      2>StringBuilder: is similar to StringBuffer in that it is also used to create mutable strings. However, StringBuilder is not thread-safe, meaning it doesn't have the synchronization 
+               - mostly same like string buffer but its not thread-safe.
+
+3)Abstract Class:
+        -An abstract class is a class that cannot be instantiated on its own but can provide a partial implementation of methods. An abstract class can have both abstract methods (without
+          implementation) and concrete methods (with implementation). 
+
+        - abstract class Animal {
+         abstract void sound();  // Abstract method (no implementation)
+    
+          void eat() {  // Concrete method (with implementation)
+        System.out.println("This animal eats food.");
+              }
+           }
+
+4)Instance variable, local variable and Class variable:
+
+       -Instance Variable:
+         
+        -Definition: These are non-static variables that belong to an instance of a class.
+
+        -Scope: They are accessible by all methods in the class and are tied to the object of the class.
+
+        -Lifetime: They exist as long as the object exists.
+
+        -Usage: Instance variables hold the state or attributes of an object.
+  
+        -class Car {
+         String color;  // Instance variable
+
+          public void setColor(String color) {
+         this.color = color;  // Using instance variable
+               }
+           }
+
+         -Local Variable:
+
+         -Definition: These are variables declared inside a method, constructor, or block of code.
+
+         -Scope: They are only accessible within the method, constructor, or block where they are declared.
+
+         -Lifetime: They are created when the method is called and destroyed when the method finishes executing.
+
+         -Usage: Local variables are used to temporarily store values within a method.
+        
+          public void printCarDetails() {
+          String model = "Sedan";  // Local variable
+           System.out.println(model);
+             }
+
+          -Class Variable (Static Variable):
+
+          -Definition: These are static variables that are declared with the static keyword. They belong to the class rather than any instance.
+
+          -Scope: They are accessible by all methods in the class and can be accessed without creating an object.
+
+          -Lifetime: Class variables are created when the class is loaded and destroyed when the program terminates.
+
+          -Usage: Class variables are used for values that are shared across all instances of a class.
+
+          class Car {
+          static int count = 0;  // Class variable
+
+           public Car() {
+          count++;  // Increment class variable
+           }
+
+            public static void printCount() {
+          System.out.println(count);  // Accessing class variable
+              }
+                    }
+5)Why interface cannot have constructors:
+     
+         -Interfaces Cannot Be Instantiated.
+         -Interfaces Are Intended for Abstract Behavior.
+
+6)Object and class : -
+
+         - Object and class :-
+           In Java, an object is an instance of a class. 
+ 
+           It is a fundamental part of object-oriented programming (OOP). An object is created based on a class and contains both data (attributes) and methods (functions) that define its  
+            behavior.
+           
+          -Class: A blueprint or template for creating objects. It defines the structure and behavior that the objects of that class will have.
+
+          -Object: An actual instance of a class, created in memory, which contains the specific data and behavior as defined in the class.
+           
+          -Characteristics of an Object:
+           State (Attributes): The data stored in an object, typically represented by fields or variables.
+
+           Example: If you have a Car class, the state could include attributes like color, model, speed, etc.
+
+           Behavior (Methods): The actions or operations an object can perform, defined by the methods in the class.
+
+           Example: In the Car class, behaviors could include start(), accelerate(), brake(), etc.
+ 
+           Identity: Every object has a unique identity, which distinguishes it from other objects, even if they have the same state or behavior.
+
+
+                                                      // Define a class (blueprint)
+                                        
+                                   class Car {
+    // Attributes (state)
+    String color;
+    String model;
+    int speed;
+
+    // Method (behavior)
+    void start() {
+        System.out.println("The car has started.");
+    }
+
+    void accelerate() {
+        System.out.println("The car is accelerating.");
+    }
+
+    void brake() {
+        System.out.println("The car is slowing down.");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Creating an object of the class (instance of the Car class)
+        Car myCar = new Car();
+        
+        // Setting attributes (state)
+        myCar.color = "Red";
+        myCar.model = "Toyota";
+        myCar.speed = 0;
+        
+        // Calling methods (behavior)
+        myCar.start();  // The car has started.
+        myCar.accelerate();  // The car is accelerating.
+        myCar.brake();  // The car is slowing down.
+        
+        // Printing object attributes
+        System.out.println("Car Model: " + myCar.model);
+        System.out.println("Car Color: " + myCar.color);
+    }
+}
+
+          -Car is the class (a blueprint or template for objects of type Car).
+
+          -myCar is the object (an instance of the Car class).
+
+          -new Car() is the constructor call that creates a new instance of the Car class in memory.
+
+7)Wrapper class:  
+          
+          -Wrapper classes provide useful methods and allow you to use primitives as objects. They also allow for autoboxing and unboxing:
+ 
+          -Autoboxing: Automatic conversion of a primitive type to its corresponding wrapper class (e.g., int to Integer).
+
+          -Unboxing: Automatic conversion of a wrapper class to its corresponding primitive type (e.g., Integer to int).
+               int num = 10;           // Primitive
+                Integer numWrapper = num; // Autoboxing (primitive to wrapper)
+
+                 int primitiveNum = numWrapper; // Unboxing (wrapper to primitive)
+
+8)typecasting implicit and explicit:
+
+                  - Implicit Typecasting (also known as automatic typecasting):
+                   -This occurs when the compiler automatically converts a smaller data type to a larger data type.
+
+                   -It happens when there is no loss of data or when the conversion is safe.
+
+                   -This type of casting is done by the compiler itself, and the programmer does not need to explicitly specify it.
+                       int a = 10;
+                       double b = a;  // Implicit casting from int to double
+                 
+                     -Explicit Typecasting (also known as manual typecasting or type coercion):
+                    
+                  -This occurs when the programmer explicitly tells the compiler to convert a data type to another type.
+
+                  -It is used when there is a potential loss of data, and the programmer needs to ensure that the conversion is intentional.
+
+                  -In C++, explicit casting is done using casting operators like static_cast, dynamic_cast, reinterpret_cast, or const_cast.
+
+                       double a = 9.99;
+                         int b = (int) a;  // Explicit casting from double to int
+
+9)Java is not considered a pure OOP language because:
+
+                    
+                  -Java is not considered a pure OOP language because:
+
+                            1> Primitive Data Types: Java uses non-object primitive types (e.g., int, char): Types: Java includes primitive types like int, char, float, boolean, etc.
+                                 
+                             These  are not objects, and they do not support methods or properties, which goes against the core OOP principle of everything being an object. 
+                                     
+                             In pure OOP languages, even primitive types would be objects.
+
+                            2> Static Methods/Variables: static members belong to the class, not objects.:In Java, methods and variables can be declared as static, meaning they belong to the class rather than an instance of the class. This breaks the rule that OOP should focus on objects and their interactions. Static members are not tied to object instances, so they don't adhere strictly to the principles of OOP.
+
+                             3>No Multiple Inheritance: Java doesn’t allow multiple inheritance for classes (only interfaces):Ambuguty issue dimond problem.
+
+10)Main Method - overloading allowed?
+
+                             -Yes!!.overloading the main method is allowed in Java. You can define multiple main methods with different parameter lists (method signatures) in the same 
+                              class, just like any other method overloading in Java. However, the JVM (Java Virtual Machine) will only call the standard main method
+                               (public static void main(String[] args))  when you run the program.
+11)java.util :
+                           - java.util is a package that contains a collection of utility classes, including data structures, date and time utilities, random number generators, and other 
+                                helper functions.In Java, util is short for utility and is a standard package within the Java API that provides a collection of utility classes. 
+                                
+                            - It includes multiple classes : list ,set,map and other scanner etc
+
+12)
