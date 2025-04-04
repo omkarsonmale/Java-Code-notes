@@ -141,7 +141,7 @@ class doublylinkedlist{
 
 
 
-public class doublylinkedlist
+public class Doublylinkedlist
 {
 	public static void main(String[] args) {
 		 doublylinkedlist dl = new doublylinkedlist();
