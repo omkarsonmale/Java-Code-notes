@@ -108,7 +108,7 @@ class Linkedlist{
 
 
 
-public class Main
+public class Singlylinkedlist
 {
 	public static void main(String[] args) {
 	  
