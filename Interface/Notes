@@ -1,1 +1,39 @@
-hi
+-->Framed Answer:
+An interface in Java is a reference type that defines a set of abstract methods (without implementation) which a class must implement. It is used to achieve abstraction and multiple inheritance in Java.
+It is a reference type — similar to a class but with only method signatures (no implementation) — used to define rules or a contract that classes can follow.
+--> Key Points to Include:
+-->Definition:
+
+An interface is like a contract. Any class that implements it must provide implementations for all its methods.
+
+-->Purpose:
+
+Used to achieve abstraction.
+
+Supports multiple inheritance (which Java classes do not allow directly).
+
+-->Method Rules:
+
+All methods are implicitly public and abstract (until Java 7).
+
+From Java 8 onwards, interfaces can also have:
+
+default methods (with body)
+
+static methods (with body)
+
+From Java 9 onwards, interfaces can also have private methods.
+
+-->Fields:
+
+All variables in interfaces are public, static, and final (constants).
+
+-->Implementation:
+
+A class uses the implements keyword to use an interface.
+
+It must implement all abstract methods of that interface.
+
+-->Multiple Interfaces:
+
+A class can implement multiple interfaces, allowing multiple inheritance of type.
