@@ -37,3 +37,113 @@ It must implement all abstract methods of that interface.
 -->Multiple Interfaces:
 
 A class can implement multiple interfaces, allowing multiple inheritance of type.
+
+--> IMP Notes: 
+interface a{
+   default void print(){                    
+        System.out.println("A");
+    }
+}
+
+interface b{
+    default void print(){
+        System.out.println("B");
+    }
+}
+
+class c implements a,b{
+    public void print(){
+    a.super.print();
+    }
+    
+}
+public class Main
+{
+	public static void main(String[] args) {
+	c cc = new c();
+		cc.print();
+	}
+}     // A
+
+-->All methods in an interface are implicitly public and abstract.
+
+-->Ambiguity Problem:
+1>In Java, ambiguity problems typically arise when:
+A class inherits the same method signature from multiple interfaces or classes.
+You have conflicting method definitions from different sources.
+like for abstact methodes there is no issue ex
+->No ambiguity (no default, just abstract):
+interface A {
+    void print(); // abstract
+}
+
+interface B {
+    void print(); // abstract
+}
+
+class C implements A, B {
+    public void print() {
+        System.out.println("Resolved only once");
+    }
+}
+
+->Ambiguity with default methods:
+ex:
+interface A {
+    default void print() {
+        System.out.println("A");
+    }
+}
+
+interface B {
+    default void print() {
+        System.out.println("B");
+    }
+}
+
+class C implements A, B {
+    // ❌ Compilation Error: class C inherits unrelated defaults for print()
+}
+Both interfaces gave me a working print() method. I don’t know which one to pick. You must resolve it.”
+class C implements A, B {
+    public void print() {
+        A.super.print(); // or B.super.print();
+    }
+}
+-->Default method and abstarct method:
+
+-->Abstract Method in Interface (Common before Java 8):
+Characteristics:
+Has no body.
+Must be implemented by the class.
+Used to enforce a rule: "you must write this method".
+interface A {
+    void show(); // abstract method
+}
+
+class B implements A {
+    public void show() {
+        System.out.println("Hello from B");
+    }
+}
+
+->Default Method in Interface (New in Java 8):
+Characteristics:
+Has a body (code inside it!)
+Optional to override in class
+Used to provide a default behavior
+
+interface A {
+    default void show() {
+        System.out.println("Hello from A");
+    }
+}
+
+class B implements A {
+    // show() is inherited from A unless overridden
+}
+
+--> Default methode so either we nned to oerrride them or call them or if multimple interfaces implemented which have same default method then we need to use super keyword.
+interfacename.super.methodename();
+
+--> While implementing methodes in class from iterface each we need to declare public complusory each method.
