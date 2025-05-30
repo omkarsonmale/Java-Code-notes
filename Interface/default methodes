@@ -1,0 +1,30 @@
+/*
+Notes:
+Characteristics:
+Has a body (code inside it!)
+
+Optional to override in class
+
+Used to provide a default behavior
+
+*/
+interface a{
+   default void print(){                    
+        System.out.println("Hi");
+    }
+}
+class b implements a{
+   public void print(){
+        System.out.println("By");
+    }
+}
+
+public class Main
+{
+	public static void main(String[] args) {
+		b bb= new b();
+		
+		bb.print();
+		
+	}
+}
