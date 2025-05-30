@@ -147,3 +147,31 @@ class B implements A {
 interfacename.super.methodename();
 
 --> While implementing methodes in class from iterface each we need to declare public complusory each method.
+--> Example :
+interface a{
+   default void print(){                    
+        System.out.println("A");
+    }
+}
+
+interface b{
+    default void printb(){
+        System.out.println("B");
+    }
+}
+
+class c implements a,b{
+    public void print(){
+   System.out.println("this is default call interface a");
+    }
+     public void printb(){
+   System.out.println("this is default call interface b");
+    }
+}
+public class Main
+{
+	public static void main(String[] args) {
+	c cc = new c();
+		cc.print();
+	}
+}
